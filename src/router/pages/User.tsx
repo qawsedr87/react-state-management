@@ -1,5 +1,8 @@
+import { Provider } from "react-redux";
 import UserForm from "../../users/context/UserForm";
 import UserProvider from "../../users/context/UserProvider";
+import store from "../../users/redux/store/store";
+import UserFormRedux from "../../users/redux/components/UserFormRedux";
 
 const User = () => {
     return (
@@ -8,6 +11,11 @@ const User = () => {
             <UserProvider>
                 <UserForm />
             </UserProvider>
+
+            <h1>2. User Redux and Thunk</h1>
+            <Provider store={store}>
+                <UserFormRedux />
+            </Provider>
         </>
     )
 }

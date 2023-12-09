@@ -27,8 +27,8 @@ const UserForm = () => {
                 <tbody>
                     {users.map((user) => (
                         <tr key={user.id}>
-                            <th>{user.id}</th>
-                            <th>{user.name}</th>
+                            <td>{user.id}</td>
+                            <td>{user.name}</td>
                         </tr>
                     ))}
                 </tbody>
