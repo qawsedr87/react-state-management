@@ -3,7 +3,7 @@ interface IChildComponentProps {
     onToggle: () => void;
 }
 
-const ChildComponent = ({language, onToggle}: IChildComponentProps) => {
+const ChildComponent = ({ language, onToggle }: IChildComponentProps) => {
     return (
         <div>
             <h2>Child</h2>

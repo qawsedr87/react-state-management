@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Child from './toggle/context/Child'
+import LanguageProvider from './toggle/context/LanguageProvider'
 import ParentComponent from './toggle/props/ParentComponent'
 
 function App() {
@@ -9,6 +8,11 @@ function App() {
     <>
       <h1>Toggle Props</h1>
       <ParentComponent />
+      <hr />
+      <h1>Toggle Context API</h1>
+      <LanguageProvider>
+        <Child />
+      </LanguageProvider>
     </>
   )
 }

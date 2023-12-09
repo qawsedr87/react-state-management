@@ -7,7 +7,7 @@ const ParentComponent = () => {
     const toggleLanguage = () => {
         setCurrLang(currLang === "JavaScript" ? "Java" : "JavaScript");
     }
-    
+
     return (
         <div>
             <h2>Parent</h2>
