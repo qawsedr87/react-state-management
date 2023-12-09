@@ -24,19 +24,17 @@ const UserProvider = ({ children }: IProps) => {
 
     const fetchInitialUsers = () => {
         fetch("https://jsonplaceholder.typicode.com/users")
-          .then((response) => response.json())
-          .then((data) => {
-            const users = data.slice(0,2).map((user: User) => ({ id: user.id, name: user.name }));
-            setUsers(users);
-          });
-      };
-    
-      useEffect(() => {
-        console.log(users.length);
-        
-        if (users.length === 0) 
+            .then((response) => response.json())
+            .then((data) => {
+                const users = data.slice(0, 2).map((user: User) => ({ id: user.id, name: user.name }));
+                setUsers(users);
+            });
+    };
+
+    useEffect(() => {
+        if (users.length === 0)
             fetchInitialUsers();
-      }, [users]);
+    }, [users]);
 
     const addUser = (name: string) => {
         const newUser: User = {

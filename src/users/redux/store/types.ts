@@ -3,7 +3,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import store from "./store";
 
 export type User = {
-    id: string;
+    id: number;
     name: string;
 };
 

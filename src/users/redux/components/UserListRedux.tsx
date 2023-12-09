@@ -1,11 +1,20 @@
-import { useContext } from "react";
-import { IUserContextProps, userContext } from "./UserProvider";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/types';
+import { fetchUsers } from '../store/actions/user.action';
+import { useThunkDispatch } from '../store/hooks';
 
-const UserList = () => {
-    const { users } = useContext<IUserContextProps>(userContext);
+
+const UserListRedux = () => {
+    const dispatch = useThunkDispatch();
+    const users = useSelector((state: RootState) => state.user.users);
+
+    useEffect(() => {
+        if (users.length === 0)
+            dispatch(fetchUsers());
+    }, [dispatch, users]);
 
     return (
-        <>
         <div>
             <h2>All Users</h2>
             <table>
@@ -25,8 +34,7 @@ const UserList = () => {
                 </tbody>
             </table>
         </div>
-        </>
-    )
-}
+    );
+};
 
-export default UserList;
+export default UserListRedux;

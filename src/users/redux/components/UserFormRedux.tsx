@@ -1,49 +1,35 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../store/types';
 import { addUser, fetchUsers } from '../store/actions/user.action';
 import { useThunkDispatch } from '../store/hooks';
+import { useNavigate } from 'react-router-dom';
 
 const UserFormRedux = () => {
   const dispatch = useThunkDispatch();
   const users = useSelector((state: RootState) => state.user.users);
-  const [newUserName, setNewUserName] = React.useState<string>('');
+  const [newUserName, setNewUserName] = useState<string>('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch users when the component mounts
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    if (users.length === 0)
+      dispatch(fetchUsers());
+  }, [dispatch, users]);
 
   const handleAddUser = () => {
     // Dispatch action to add a new user
-    dispatch(addUser({ id: String(users.length + 1), name: newUserName }));
+    dispatch(addUser({ id: users.length + 1, name: newUserName }));
 
     // Reset the input
     setNewUserName('');
+
+    // redirect 
+    navigate('/users');
   };
 
   return (
     <div>
-      <div>
-        <h2>All Users</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
       <div>
         <h2>User Form</h2>
         <input
