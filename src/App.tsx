@@ -1,10 +1,13 @@
 import './App.css'
 import RouterApp from './router/RouterApp'
+import UserProvider from './users/context/UserProvider'
 
 function App() {
   return (
     <>
-      <RouterApp />
+      <UserProvider>
+        <RouterApp />
+      </UserProvider>
     </>
   )
 }

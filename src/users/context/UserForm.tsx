@@ -1,39 +1,25 @@
 import { useContext, useState } from "react";
 import { IUserContextProps, userContext } from "./UserProvider";
 import './context.css';
+import { useNavigate } from "react-router-dom";
 
 const UserForm = () => {
-    const { users, addUser } = useContext<IUserContextProps>(userContext);
+    const { addUser } = useContext<IUserContextProps>(userContext);
     const [newUserName, setNewUserName] = useState<string>('');
+
+    const navigate = useNavigate();
 
     const handleAddUser = () => {
         addUser(newUserName);
 
         // reset 
         setNewUserName('');
+        
+        // redirect 
+        navigate('/users');
     }
 
     return (
-        <>
-        <div>
-            <h2>All Users</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user) => (
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td>{user.name}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
         <div>
             <h2>User Form</h2>
             <input
@@ -44,7 +30,6 @@ const UserForm = () => {
             />
             <button onClick={handleAddUser}>Add User</button>
         </div>
-        </>
     );
 }
 

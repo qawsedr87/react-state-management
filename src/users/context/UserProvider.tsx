@@ -22,17 +22,21 @@ export const userContext = createContext<IUserContextProps>({
 const UserProvider = ({ children }: IProps) => {
     const [users, setUsers] = useState<User[]>([]);
 
-    useEffect(() => {
-        // fetch 
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then((response) => response.json())
-            .then((data) => {
-                const users = data
-                    .slice(0, 2)
-                    .map((user: User) => ({ id: user.id, name: user.name }));
-                setUsers(users);
-            });
-    }, []);
+    const fetchInitialUsers = () => {
+        fetch("https://jsonplaceholder.typicode.com/users")
+          .then((response) => response.json())
+          .then((data) => {
+            const users = data.slice(0,2).map((user: User) => ({ id: user.id, name: user.name }));
+            setUsers(users);
+          });
+      };
+    
+      useEffect(() => {
+        console.log(users.length);
+        
+        if (users.length === 0) 
+            fetchInitialUsers();
+      }, [users]);
 
     const addUser = (name: string) => {
         const newUser: User = {
